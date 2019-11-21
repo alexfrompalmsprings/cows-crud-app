@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/alexfrompalmsprings/cows-crud-app#readme",
   "dependencies": {
+    "mysql": "^2.17.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },

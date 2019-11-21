@@ -1,7 +1,7 @@
 // express & port
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3004;
 const path = require('path');
 
 // connects the db
@@ -22,12 +22,13 @@ app.use(express.urlencoded({
 
 // this is the get
 app.get('/api/cows', (req, res) => {
-  db.query('SELECT * FROM cows', function (err, results) {
+  db.query('SELECT cowName, cowDescription FROM cows', function (err, results) {
     if (err) {
       res.sendStatus(404)
     } else {
       console.log('results ------->', results)
-      res.sendStatus(200)
+      // res.sendStatus(200)
+      res.json(results)
     }
   })
 })
@@ -35,17 +36,27 @@ app.get('/api/cows', (req, res) => {
 // this the post
 app.post('/api/cows', (req, res) => {
 
-  var queryPost = "INSERT INTO cows (cowName, cowDescription) VALUES( ?, ?)";
+  var queryPost = "INSERT INTO cows (cowName, cowDescription) VALUES( ?, ?)"
+  var insertVals = [req.body.cowName, req.body.cowDescription];
 
-  db.query(queryPost, req.body.cowName, req.body.cowDescription, function (err, results) {
+  // const {name, description} = req.body
+  // var cowDescription = req.body.description;
+
+  console.log('---->', req.body);
+  db.query(queryPost, insertVals, function (err, results) {
     if (err) {
-      res.sendStatus(404)
+      console.log('#################',err)
+      res.sendStatus(500)
     } else {
       console.log('results ------->', results)
-      res.sendStatus(200)
+      // res.sendStatus(200)
+      res.json({cowName, cowDescription});
     }
   })
 })
+
+
+
 
 //todo -> need to have the DELETE & PUT METHODS
 
