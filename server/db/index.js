@@ -1,7 +1,5 @@
-//! I BELIEVE THIS FILE IS WORKING CORRECTLY
 const mysql = require('mysql');
 
-//!might need to change this to db
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'student',
