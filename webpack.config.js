@@ -1,13 +1,13 @@
 module.exports = {
   devtool: 'inline-source-map',
-  entry: './src/index.jsx',
+  entry: './client/src/index.jsx',
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/public/dist',
     publicPath: '/',
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './public/dist',
   },
   module: {
     rules: [{

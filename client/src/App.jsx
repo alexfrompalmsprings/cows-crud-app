@@ -1,7 +1,6 @@
 //todo  #### gotta change the names of the files once we get something going
-import two from './two.jsx'
-import three from './three.jsx';
-import four from './four.jsx';
+import React from "react"
+
 
 //! This is the part that is necessary to have at the begining of the app jsx file
 class App extends React.Component {
@@ -13,6 +12,7 @@ class App extends React.Component {
       description: "",
       topDescription: ""
     }
+
 
   //todo [Create the functions you are trying to add || submit and show]
   /*
@@ -26,7 +26,18 @@ class App extends React.Component {
 
 
   }
+
+  render(){
+    return(
+      <div> Hello</div>
+    )
+  }
+
+
+
 }
+
+
 
 
 export default App;

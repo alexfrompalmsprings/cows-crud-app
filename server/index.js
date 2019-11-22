@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const port = 3005;
-// const path = require('path');
+const path = require('path');
 
 // connects the db
 const db = require("./db");
@@ -17,9 +17,11 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-app.use(express.static(__dirname));
-console.log(__dirname);
-app.use(express.static(path.join(__dirname, 'dist')));
+// app.use(express.static(__dirname));
+// console.log(__dirname);
+// app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static('public'))
+
 
 
 
