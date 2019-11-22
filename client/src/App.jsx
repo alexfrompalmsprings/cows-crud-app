@@ -1,35 +1,58 @@
-//todo  #### gotta change the names of the files once we get something going
 import React from "react"
+import axios from "axios"
 
-
-//! This is the part that is necessary to have at the begining of the app jsx file
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       cows: [],
       name: "",
       description: "",
       topDescription: ""
     }
+    this.fetchCows = this.fetchCows.bind(this);
+  }
 
-
-  //todo [Create the functions you are trying to add || submit and show]
-  /*
-  this.handleSubmit = this.handleSubmit.bind(this);
-  this.handleChange = this.handleChange.bind(this);
-  this.handleClick = this.handleClick.bind(this);
-  */
-
-
-
-
+  fetchCows(){
+    axios.get("/api/cows")
+    .then((res) => {
+      console.log('fetch cows res.data ------>',res.data);
+    if(res && res.data){
+      this.setState({
+        cows: [...this.state.cows, ...res.data],
+        loading: false,
+      })
+    }
+    })
+    .catch(function(err){
+      console.log('we have an error in the fetchCows', err);
+    })
 
   }
 
+ componentDidMount(){
+    this.fetchCows()
+  }
+
+
+
+
+
+
   render(){
+    if(this.state.loading){
+      return null;
+    }
     return(
-      <div> Hello</div>
+      <div>
+        {this.state.cows.length && this.state.cows.map((cow, idx) => (
+          <div key={idx}>
+              <p> name: {cow.cowName}</p>
+          </div>
+        ))}
+
+      </div>
     )
   }
 
