@@ -2,6 +2,7 @@ import React from "react"
 import axios from "axios"
 
 import CowForm from './CowForm.jsx'
+import CowCard from './cowCard.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -36,18 +37,18 @@ class App extends React.Component {
   }
 
   postCow(data){
-    axios.post("/api/cows", data)
-    .then((res) => {
-      console.log('fetch cows res.data ------>',res.data);
-    if(res && res.data){
-      this.setState({
-        cows: [...this.state.cows, res.data]
+    axios.post("/api/cow", data)
+      .then((res) => {
+        console.log('fetch cows res.data ------>',res.data);
+        if(res && res.data){
+          this.setState({
+            cows: [...this.state.cows, res.data]
+          })
+        }
       })
-    }
-    })
-    .catch(function(err){
-      console.log('we have an error in the POST COW - APP.jsx', err);
-    })
+      .catch(function(err){
+        console.log('we have an error in the POST COW - APP.jsx', err);
+      })
   }
 
  componentDidMount(){
@@ -68,9 +69,11 @@ class App extends React.Component {
         <CowForm postCow={this.postCow} />
 
         {this.state.cows.length && this.state.cows.map((cow, idx) => (
-          <div key={idx}>
-              <p> name: {cow.cowName}</p>
-          </div>
+          <CowCard
+            key={idx}
+            cowName={cow.cowName}
+            id={cow.cowId}
+          />
         ))}
 
       </div>
