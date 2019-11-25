@@ -20,11 +20,6 @@ const getAllCows = (req, res) => {
 };
 
 
-//   var queryPost = "INSERT INTO cows (cowName, cowDescription) VALUES( ?, ?)"
-//   var insertVals = [req.body.cowName, req.body.cowDescription];
-
-
-
 const createCow = (req, res) => {
   const { cowName, cowDescription } = req.body;
   const createQuery = `INSERT INTO cows (cowName, cowDescription) VALUES(? , ?)`;
@@ -81,7 +76,7 @@ const deleteCowById = (req, res) => {
   const deleteCowById = `delete from cows WHERE cowId = (?)`;
 
   if (!id){
-    res.status(400).send('the cow you are trying to create does not have an ID; enter one!')
+    res.status(400).send('the cow you are trying to delete does not have an ID; enter one!')
     return
   }
 
